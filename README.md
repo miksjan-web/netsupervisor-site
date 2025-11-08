@@ -5,7 +5,7 @@
     <title>NetSupervisor for macOS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
-          content="NetSupervisor is an all-in-one network diagnostics and monitoring tool for macOS.">
+          content="NetSupervisor is an all-in-one network monitoring and diagnostics tool for macOS.">
     <style>
         :root {
             --bg: #f5f5f7;
@@ -15,7 +15,7 @@
             --muted: #6e6e73;
             --accent: #0071e3;
             --radius: 14px;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            --shadow-soft: 0 6px 24px rgba(0, 0, 0, 0.06);
             --font: -apple-system, BlinkMacSystemFont, system-ui, -system-ui, -sans-serif, sans-serif;
         }
 
@@ -29,8 +29,11 @@
             line-height: 1.6;
         }
 
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
         header {
-            background: linear-gradient(135deg, #ffffff, #f0f4ff);
+            background: linear-gradient(140deg, #ffffff, #eef3ff);
             border-bottom: 1px solid var(--border);
         }
 
@@ -46,6 +49,7 @@
             justify-content: space-between;
             gap: 16px;
             margin-bottom: 10px;
+            flex-wrap: wrap;
         }
 
         .brand {
@@ -54,17 +58,11 @@
             gap: 10px;
         }
 
-        .logo-pill {
-            width: 30px;
-            height: 30px;
+        .brand img {
+            width: 32px;
+            height: 32px;
             border-radius: 9px;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
         }
 
         .brand-title {
@@ -80,11 +78,7 @@
         nav a {
             margin-left: 14px;
             font-size: 14px;
-            text-decoration: none;
-            color: var(--accent);
         }
-
-        nav a:hover { text-decoration: underline; }
 
         .lang-switch {
             display: inline-flex;
@@ -101,6 +95,7 @@
             border-radius: 999px;
             cursor: pointer;
             color: var(--muted);
+            font-family: var(--font);
         }
 
         .lang-btn.active {
@@ -108,6 +103,8 @@
             color: var(--accent);
             box-shadow: 0 1px 4px rgba(0,0,0,0.12);
         }
+
+        /* HERO */
 
         .hero {
             display: grid;
@@ -118,7 +115,7 @@
         }
 
         h1 {
-            font-size: 30px;
+            font-size: 28px;
             margin: 0 0 8px;
         }
 
@@ -132,9 +129,10 @@
             font-size: 14px;
             color: var(--muted);
             margin: 0 0 16px;
+            padding-left: 18px;
         }
 
-        .hero-list li { margin-bottom: 2px; }
+        .hero-list li { margin-bottom: 4px; }
 
         .btn-row {
             display: flex;
@@ -143,53 +141,49 @@
             align-items: center;
         }
 
-        .btn-primary {
-            padding: 9px 18px;
+        .btn-outline {
+            padding: 8px 16px;
             border-radius: 999px;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: var(--shadow);
-        }
-
-        .btn-primary span.icon { font-size: 16px; }
-
-        .btn-ghost {
-            padding: 8px 14px;
-            border-radius: 999px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--accent);
             background: transparent;
             color: var(--accent);
             font-size: 13px;
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-soft {
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: #ffffffaa;
+            color: var(--accent);
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            text-decoration: none;
         }
 
         .hero-card {
-            background: rgba(255,255,255,0.96);
+            background: rgba(255,255,255,0.98);
             border-radius: var(--radius);
             padding: 14px 14px 10px;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-soft);
             border: 1px solid var(--border);
             font-size: 12px;
         }
 
         .hero-label {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--muted);
             margin-bottom: 4px;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.14em;
         }
 
         .hero-metric-row {
@@ -214,10 +208,12 @@
         }
 
         .note {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--muted);
-            margin-top: 4px;
+            margin-top: 6px;
         }
+
+        /* SECTIONS */
 
         .section {
             margin: 26px 0;
@@ -296,23 +292,29 @@
             margin-bottom: 2px;
         }
 
+        .who-section ul {
+            padding-left: 18px;
+            font-size: 13px;
+            color: #3a3a3c;
+        }
+
         .cta-section {
-            margin: 32px 0 10px;
+            margin: 32px 0 18px;
             text-align: center;
-            padding: 18px 16px 22px;
+            padding: 18px 16px 20px;
             background: linear-gradient(135deg, #ffffff, #e9f3ff);
             border-radius: var(--radius);
             border: 1px solid var(--border);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-soft);
         }
 
         .cta-section h2 {
             margin: 0 0 6px;
-            font-size: 22px;
+            font-size: 21px;
         }
 
         .cta-section p {
-            margin: 0 0 12px;
+            margin: 0 0 10px;
             font-size: 14px;
             color: #3a3a3c;
         }
@@ -324,16 +326,29 @@
             text-align: center;
         }
 
+        footer a { margin: 0 6px; }
+
         /* Responsive */
+
         @media (max-width: 800px) {
-            .hero { grid-template-columns: 1fr; }
-            .cards { grid-template-columns: 1fr 1fr; }
-            .features-grid { grid-template-columns: 1fr 1fr; }
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .cards {
+                grid-template-columns: 1fr 1fr;
+            }
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 540px) {
-            .cards { grid-template-columns: 1fr; }
-            .features-grid { grid-template-columns: 1fr; }
+            .cards {
+                grid-template-columns: 1fr;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
             .nav-row {
                 flex-direction: column;
                 align-items: flex-start;
@@ -346,15 +361,16 @@
     <div class="container">
         <div class="nav-row">
             <div class="brand">
-                <div class="logo-pill">👁‍🗨</div>
+                <!-- Ikona aplikace -->
+                <img src="icon-1024_v2.png" alt="NetSupervisor icon">
                 <div>
                     <div class="brand-title">NetSupervisor</div>
-                    <div class="brand-sub">Network diagnostics &amp; monitoring for macOS</div>
+                    <div class="brand-sub">Network monitoring &amp; diagnostics for macOS</div>
                 </div>
             </div>
             <div>
                 <nav>
-                    <a href="#top" onclick="scrollTo(0,0)">Home</a>
+                    <a href="#top">Home</a>
                     <a href="support.html">Support</a>
                     <a href="privacy.html">Privacy</a>
                 </nav>
@@ -370,44 +386,43 @@
             <div>
                 <!-- EN -->
                 <div class="lang-block" data-lang-content="en">
-                    <h1>Control your network from one clean dashboard.</h1>
+                    <h1>Keep your network under control.</h1>
                     <p class="hero-sub">
-                        NetSupervisor brings speed tests, monitoring, scanning and diagnostics
-                        into a single, macOS-native app.
+                        NetSupervisor brings speed testing, device discovery, monitoring and diagnostics
+                        into one clean, native macOS app.
                     </p>
                     <ul class="hero-list">
-                        <li>Measure download, upload, ping &amp; jitter</li>
-                        <li>Discover devices in your LAN and monitor key hosts</li>
-                        <li>Use pro tools: Ping, Traceroute, DNS, Whois, Port Scan, Wake-on-LAN</li>
+                        <li>Instant overview of connection, latency and uptime</li>
+                        <li>Automatic monitoring and clear alerts before users notice issues</li>
+                        <li>All core tools in one place – no complex setup</li>
                     </ul>
+                    <div class="btn-row">
+                        <a class="btn-outline" href="#features">Explore features</a>
+                        <a class="btn-soft" href="support.html">Need details or help? Support →</a>
+                    </div>
                 </div>
                 <!-- CZ -->
                 <div class="lang-block" data-lang-content="cz" style="display:none">
-                    <h1>Mějte svou síť pod kontrolou na jednom místě.</h1>
+                    <h1>Mějte svou síť pod kontrolou.</h1>
                     <p class="hero-sub">
-                        NetSupervisor spojuje test rychlosti, monitoring, skenování a diagnostiku
+                        NetSupervisor spojuje test rychlosti, skenování zařízení, monitoring a diagnostiku
                         do jedné přehledné aplikace pro macOS.
                     </p>
                     <ul class="hero-list">
-                        <li>Změřte download, upload, ping a jitter</li>
-                        <li>Najděte zařízení v LAN a sledujte jejich dostupnost</li>
-                        <li>Využijte nástroje: Ping, Traceroute, DNS, Whois, Port Scan, Wake-on-LAN</li>
+                        <li>Okamžitý přehled o připojení, latenci a dostupnosti</li>
+                        <li>Automatický monitoring a upozornění dřív, než si problému všimnou uživatelé</li>
+                        <li>Všechny klíčové nástroje na jednom místě – bez složitého nastavování</li>
                     </ul>
-                </div>
-
-                <div class="btn-row">
-                    <!-- TODO: doplň svůj App Store odkaz -->
-                    <a class="btn-primary" href="#">
-                        <span class="icon"></span>
-                        <span>Download on the Mac App Store</span>
-                    </a>
-                    <a class="btn-ghost" href="support.html">Support &amp; Documentation →</a>
+                    <div class="btn-row">
+                        <a class="btn-outline" href="#features">Prohlédnout funkce</a>
+                        <a class="btn-soft" href="support.html">Potřebujete poradit? Podpora →</a>
+                    </div>
                 </div>
             </div>
 
-            <!-- jednoduchá grafika / mini dashboard -->
+            <!-- Mini vizualizace dashboardu -->
             <div class="hero-card">
-                <div class="hero-label">Network overview</div>
+                <div class="hero-label">Example network snapshot</div>
                 <div class="hero-metric-row">
                     <div class="hero-metric">
                         <strong>9.3 Mb/s</strong>
@@ -437,7 +452,7 @@
                     </div>
                 </div>
                 <div class="note">
-                    UI inspired by the actual NetSupervisor dashboard.
+                    Visualization based on the real NetSupervisor dashboard interface.
                 </div>
             </div>
         </section>
@@ -447,167 +462,165 @@
 <main>
     <div class="container">
 
-        <!-- CORE BENEFITS -->
-        <section class="section">
-            <h2 data-lang-content="en">Everything you need to understand your network</h2>
-            <h2 data-lang-content="cz" style="display:none">Vše, co potřebujete pro přehled o síti</h2>
-
-            <p class="lang-block" data-lang-content="en">
-                NetSupervisor combines essential network tools into one intuitive interface so you can
-                quickly detect issues, verify performance and document results.
-            </p>
-            <p class="lang-block" data-lang-content="cz" style="display:none">
-                NetSupervisor spojuje klíčové síťové nástroje do jednoho přehledného rozhraní, takže můžete
-                rychle odhalit problémy, ověřit výkon a snadno vše zdokumentovat.
-            </p>
+        <!-- BENEFITS -->
+        <section class="section" id="features">
+            <h2 data-lang-content="en">Why NetSupervisor?</h2>
+            <h2 data-lang-content="cz" style="display:none">Proč právě NetSupervisor?</h2>
 
             <div class="cards">
                 <div class="card">
-                    <div class="pill">Speed Test</div>
-                    <h3>Accurate performance checks</h3>
+                    <h3 data-lang-content="en">Instant clarity</h3>
+                    <h3 data-lang-content="cz" style="display:none">Okamžitý přehled</h3>
                     <p class="lang-block" data-lang-content="en">
-                        Measure download, upload, latency and jitter with history and charts.
+                        One dashboard for connection details, recent tests, monitored hosts and alerts.
                     </p>
                     <p class="lang-block" data-lang-content="cz" style="display:none">
-                        Měří download, upload, latenci a jitter s historií a grafy.
+                        Jeden přehled pro informace o připojení, poslední testy, sledované cíle a upozornění.
                     </p>
-                    <small>Ideal for verifying ISP performance.</small>
+                    <small>Designed to answer “what’s wrong?” in seconds.</small>
                 </div>
+
                 <div class="card">
-                    <div class="pill">LAN Scanner</div>
-                    <h3>See every device</h3>
+                    <h3 data-lang-content="en">Fewer outages</h3>
+                    <h3 data-lang-content="cz" style="display:none">Méně výpadků</h3>
                     <p class="lang-block" data-lang-content="en">
-                        Discover devices in your local network with IP, MAC and vendor details.
+                        Continuous monitoring and clear thresholds help you react before users complain.
                     </p>
                     <p class="lang-block" data-lang-content="cz" style="display:none">
-                        Najděte zařízení ve vaší síti včetně IP, MAC adres a výrobce.
+                        Průběžný monitoring a přehledné prahy umožní reagovat dřív, než si problému všimnou uživatelé.
                     </p>
-                    <small>Identify unknown or new clients instantly.</small>
+                    <small>Perfect for servers, routers, VPNs and key services.</small>
                 </div>
+
                 <div class="card">
-                    <div class="pill">Monitoring</div>
-                    <h3>Stay ahead of outages</h3>
+                    <h3 data-lang-content="en">Professional toolkit</h3>
+                    <h3 data-lang-content="cz" style="display:none">Profesionální výbava</h3>
                     <p class="lang-block" data-lang-content="en">
-                        Monitor hosts over time and get notified about latency spikes or downtime.
+                        Ping, traceroute, port scan, DNS, Whois, Wake-on-LAN and exportable reports – all in one app.
                     </p>
                     <p class="lang-block" data-lang-content="cz" style="display:none">
-                        Sledujte dostupnost hostitelů a nechte se upozornit na výpadky či zvýšenou latenci.
+                        Ping, Traceroute, Port Scan, DNS, Whois, Wake-on-LAN a export reportů – vše v jedné aplikaci.
                     </p>
-                    <small>Perfect for servers, routers, VPNs.</small>
+                    <small>No need to jump between multiple tools.</small>
                 </div>
             </div>
         </section>
 
         <!-- TOOLS OVERVIEW -->
         <section class="section">
-            <h2 data-lang-content="en">Built-in professional tools</h2>
-            <h2 data-lang-content="cz" style="display:none">Profesionální nástroje v jedné aplikaci</h2>
+            <h2 data-lang-content="en">What NetSupervisor can do</h2>
+            <h2 data-lang-content="cz" style="display:none">Co NetSupervisor umí</h2>
+
+            <p class="lang-block" data-lang-content="en">
+                Use NetSupervisor as your central hub for testing, monitoring and documenting your network.
+            </p>
+            <p class="lang-block" data-lang-content="cz" style="display:none">
+                Použijte NetSupervisor jako centrální místo pro testování, monitoring a dokumentaci vaší sítě.
+            </p>
 
             <div class="features-grid">
                 <div>
-                    <strong>Ping</strong>
-                    <span data-lang-content="en">Check responsiveness of any host.</span>
-                    <span data-lang-content="cz" style="display:none">Ověření odezvy libovolného hostitele.</span>
-                </div>
-                <div>
-                    <strong>Traceroute</strong>
-                    <span data-lang-content="en">Visualize the path of your packets.</span>
-                    <span data-lang-content="cz" style="display:none">Zobrazení cesty paketů sítí.</span>
-                </div>
-                <div>
-                    <strong>Port Scan</strong>
-                    <span data-lang-content="en">Find open and filtered ports.</span>
-                    <span data-lang-content="cz" style="display:none">Zjištění otevřených a filtrovaných portů.</span>
-                </div>
-                <div>
-                    <strong>DNS Lookup</strong>
-                    <span data-lang-content="en">Resolve records (A, AAAA, MX, TXT, NS...).</span>
-                    <span data-lang-content="cz" style="display:none">Dotazy na záznamy (A, AAAA, MX, TXT, NS...).</span>
-                </div>
-                <div>
-                    <strong>Whois</strong>
-                    <span data-lang-content="en">Check domain and IP ownership.</span>
-                    <span data-lang-content="cz" style="display:none">Informace o vlastnících domén a IP.</span>
-                </div>
-                <div>
-                    <strong>Wake-on-LAN</strong>
-                    <span data-lang-content="en">Wake devices remotely.</span>
-                    <span data-lang-content="cz" style="display:none">Vzdálené probouzení zařízení.</span>
-                </div>
-                <div>
-                    <strong>Reports</strong>
-                    <span data-lang-content="en">Export results to CSV or PDF.</span>
-                    <span data-lang-content="cz" style="display:none">Export výsledků do CSV nebo PDF.</span>
-                </div>
-                <div>
                     <strong>Dashboard</strong>
-                    <span data-lang-content="en">All key metrics on one screen.</span>
-                    <span data-lang-content="cz" style="display:none">Klíčové metriky přehledně na jedné obrazovce.</span>
+                    <span data-lang-content="en">Overview of connection, tests and monitoring.</span>
+                    <span data-lang-content="cz" style="display:none">Přehled připojení, testů a monitoringu.</span>
+                </div>
+                <div>
+                    <strong>Speed Test</strong>
+                    <span data-lang-content="en">Download, upload, ping &amp; jitter with history.</span>
+                    <span data-lang-content="cz" style="display:none">Download, upload, ping a jitter s historií.</span>
+                </div>
+                <div>
+                    <strong>LAN Scanner</strong>
+                    <span data-lang-content="en">Find every device in your network.</span>
+                    <span data-lang-content="cz" style="display:none">Najděte všechna zařízení v síti.</span>
+                </div>
+                <div>
+                    <strong>Monitoring</strong>
+                    <span data-lang-content="en">Targets, thresholds, alerts and uptime.</span>
+                    <span data-lang-content="cz" style="display:none">Cíle, prahy, upozornění a dostupnost.</span>
+                </div>
+                <div>
+                    <strong>Topology</strong>
+                    <span data-lang-content="en">Visual map of your network.</span>
+                    <span data-lang-content="cz" style="display:none">Vizualizace struktury sítě.</span>
+                </div>
+                <div>
+                    <strong>Ping &amp; Traceroute</strong>
+                    <span data-lang-content="en">Diagnose routes and response times.</span>
+                    <span data-lang-content="cz" style="display:none">Diagnostika cest a odezvy.</span>
+                </div>
+                <div>
+                    <strong>DNS &amp; Whois</strong>
+                    <span data-lang-content="en">Domain and record details.</span>
+                    <span data-lang-content="cz" style="display:none">Detailní informace o doménách.</span>
+                </div>
+                <div>
+                    <strong>Port Scan &amp; Reports</strong>
+                    <span data-lang-content="en">Open ports and exportable results.</span>
+                    <span data-lang-content="cz" style="display:none">Otevřené porty a export výsledků.</span>
                 </div>
             </div>
 
             <p class="note">
-                Replace this note with real screenshots from NetSupervisor to visually present the interface.
+                Use your application screenshots alongside these sections to visually demonstrate the clean interface.
             </p>
         </section>
 
-        <!-- WHY NETSUPERVISOR -->
-        <section class="section">
-            <h2 data-lang-content="en">Why choose NetSupervisor?</h2>
-            <h2 data-lang-content="cz" style="display:none">Proč právě NetSupervisor?</h2>
+        <!-- FOR WHOM -->
+        <section class="section who-section">
+            <h2 data-lang-content="en">Made for</h2>
+            <h2 data-lang-content="cz" style="display:none">Vhodné pro</h2>
             <ul class="lang-block" data-lang-content="en">
-                <li>Native macOS design – fast, responsive and familiar.</li>
-                <li>Privacy-first – all analysis runs locally on your Mac.</li>
-                <li>No ads, no bloat – focused on real work.</li>
-                <li>Ideal for admins, small businesses, ISPs and advanced users.</li>
+                <li>Network &amp; system administrators</li>
+                <li>ISPs and IT support teams</li>
+                <li>Small businesses managing their own infrastructure</li>
+                <li>Power users who want full insight into their home network</li>
             </ul>
             <ul class="lang-block" data-lang-content="cz" style="display:none">
-                <li>Nativní aplikace pro macOS – rychlá, přehledná a příjemná na používání.</li>
-                <li>Soukromí na prvním místě – zpracování probíhá lokálně na vašem Macu.</li>
-                <li>Bez reklam a zbytečností – zaměřeno na skutečnou práci.</li>
-                <li>Vhodné pro administrátory, menší firmy, ISP i pokročilé uživatele.</li>
+                <li>Správce sítí a systémové administrátory</li>
+                <li>ISP a interní IT týmy</li>
+                <li>Menší firmy se svou infrastrukturou</li>
+                <li>Pokročilé domácí uživatele, kteří chtějí znát stav své sítě</li>
             </ul>
         </section>
 
         <!-- PRIVACY & SUPPORT -->
         <section class="section">
-            <h2 data-lang-content="en">Privacy &amp; Support</h2>
-            <h2 data-lang-content="cz" style="display:none">Soukromí &amp; Podpora</h2>
+            <h2 data-lang-content="en">Privacy &amp; Transparency</h2>
+            <h2 data-lang-content="cz" style="display:none">Soukromí &amp; Transparentnost</h2>
             <p class="lang-block" data-lang-content="en">
-                NetSupervisor does not collect personal data or send your results to external servers.
-                For full details, read the <a href="privacy.html">Privacy Policy</a>.
-                If you need help, visit the <a href="support.html">Support page</a>.
+                NetSupervisor runs fully on your Mac. No accounts, no analytics, no selling of your data.
+                Learn more in the <a href="privacy.html">Privacy Policy</a>.
             </p>
             <p class="lang-block" data-lang-content="cz" style="display:none">
-                NetSupervisor neshromažďuje osobní údaje ani neodesílá výsledky na externí servery.
-                Podrobnosti najdete v <a href="privacy.html">Zásadách ochrany soukromí</a>.
-                S dotazy či problémy se obraťte na stránku <a href="support.html">Podpora</a>.
+                NetSupervisor běží kompletně na vašem Macu. Žádné účty, žádná analytika, žádný prodej dat.
+                Více informací najdete v <a href="privacy.html">Zásadách ochrany soukromí</a>.
             </p>
         </section>
 
-        <!-- FINAL CTA -->
+        <!-- CTA (bez download textu) -->
         <section class="cta-section">
-            <h2 data-lang-content="en">Get started with NetSupervisor</h2>
-            <h2 data-lang-content="cz" style="display:none">Začněte používat NetSupervisor</h2>
+            <h2 data-lang-content="en">Ready to explore your network?</h2>
+            <h2 data-lang-content="cz" style="display:none">Připraveni poznat svou síť?</h2>
             <p class="lang-block" data-lang-content="en">
-                Monitor, test and visualize your network with confidence — directly from your Mac.
+                Use NetSupervisor to gain full visibility, prevent outages and simplify your daily work.
             </p>
             <p class="lang-block" data-lang-content="cz" style="display:none">
-                Sledujte, testujte a vizualizujte svou síť s jistotou – přímo z vašeho Macu.
+                S NetSupervisorem získáte přehled, předejdete výpadkům a zjednodušíte si práci.
             </p>
             <div class="btn-row" style="justify-content:center;">
-                <a class="btn-primary" href="#">
-                    <span class="icon"></span>
-                    <span>Download on the Mac App Store</span>
-                </a>
-                <a class="btn-ghost" href="support.html">Support &amp; Documentation →</a>
+                <a class="btn-soft" href="support.html">Learn more &amp; get support →</a>
             </div>
         </section>
     </div>
 </main>
 
 <footer>
-    © Jan Mikš • NetSupervisor for macOS • All rights reserved
+    <div>
+        <a href="support.html">Support</a> •
+        <a href="privacy.html">Privacy Policy</a>
+    </div>
+    <div>© Jan Mikš • NetSupervisor for macOS • All rights reserved</div>
 </footer>
 
 <script>
@@ -617,15 +630,16 @@
             btn.classList.toggle('active', btn.dataset.lang === lang);
         });
 
-        // toggle all language-specific elements
+        // toggle elements by data-lang-content
         document.querySelectorAll('[data-lang-content]').forEach(el => {
-            const l = el.getAttribute('data-lang-content');
-            el.style.display = (l === lang) ? '' : 'none';
+            const contentLang = el.getAttribute('data-lang-content');
+            el.style.display = (contentLang === lang) ? '' : 'none';
         });
 
+        // toggle .lang-block elements
         document.querySelectorAll('.lang-block').forEach(el => {
-            const l = el.getAttribute('data-lang-content');
-            el.style.display = (l === lang) ? '' : 'none';
+            const contentLang = el.getAttribute('data-lang-content');
+            el.style.display = (contentLang === lang) ? '' : 'none';
         });
     }
 </script>
